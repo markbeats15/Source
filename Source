@@ -1,0 +1,94 @@
+if game.CoreGui:FindFirstChild("ScreenGui") then
+	game.CoreGui["ScreenGui"]:Destroy()
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Roundify = Instance.new("UICorner")
+local TPLabel = Instance.new("TextLabel")
+local Container = Instance.new("Frame")
+local RoundSupport = Instance.new("UICorner")
+local Input = Instance.new("TextBox")
+local Support = Instance.new("UICorner")
+local Enter = Instance.new("TextButton")
+local Support_2 = Instance.new("UICorner")
+
+
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
+MainFrame.Position = UDim2.new(0.254733235, 0, 0.304597706, 0)
+MainFrame.Size = UDim2.new(0, 569, 0, 323)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+Roundify.CornerRadius = UDim.new(0, 7)
+Roundify.Name = "Roundify"
+Roundify.Parent = MainFrame
+
+TPLabel.Name = "TPLabel"
+TPLabel.Parent = MainFrame
+TPLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TPLabel.BackgroundTransparency = 1.000
+TPLabel.Size = UDim2.new(0, 569, 0, 50)
+TPLabel.Font = Enum.Font.Nunito
+TPLabel.Text = "Teleport GUI"
+TPLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TPLabel.TextSize = 34.000
+
+Container.Name = "Container"
+Container.Parent = MainFrame
+Container.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+Container.Position = UDim2.new(0.0755711719, 0, 0.179566562, 0)
+Container.Size = UDim2.new(0, 483, 0, 241)
+
+RoundSupport.Name = "RoundSupport"
+RoundSupport.Parent = Container
+
+Input.Name = "Input"
+Input.Parent = Container
+Input.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+Input.Position = UDim2.new(0.0269151144, 0, 0.190871373, 0)
+Input.Size = UDim2.new(0, 448, 0, 50)
+Input.ClearTextOnFocus = false
+Input.Font = Enum.Font.SourceSans
+Input.Text = ""
+Input.TextColor3 = Color3.fromRGB(220, 220, 220)
+Input.TextSize = 23.000
+
+Support.Name = "Support"
+Support.Parent = Input
+
+Enter.Name = "Enter"
+Enter.Parent = Container
+Enter.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+Enter.Position = UDim2.new(0.283643901, 0, 0.601659775, 0)
+Enter.Size = UDim2.new(0, 200, 0, 50)
+Enter.Font = Enum.Font.SourceSans
+Enter.Text = "Teleport"
+Enter.TextColor3 = Color3.fromRGB(255, 255, 255)
+Enter.TextSize = 34.000
+Enter.TextWrapped = true
+
+Support_2.Name = "Support"
+Support_2.Parent = Enter
+
+
+--Scripting Moment:
+
+Enter.MouseButton1Down:Connect(function()
+	local Input = string.lower(Input.Text)
+	local foundChild = false
+	local child
+	for i, v in pairs(game.Players:GetChildren()) do
+		if string.lower(v.Name) == Input then
+			foundChild = true
+			child = v
+		end
+	end
+	if foundChild == true then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = child.Character.HumanoidRootPart.CFrame
+	end
+end)
